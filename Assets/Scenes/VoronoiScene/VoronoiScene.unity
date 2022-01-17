@@ -13399,9 +13399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297f7fed47e60451384c6621d4cf1713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  compare: 0.8
   imageDim: {x: 256, y: 256}
-  regionAmount: 30
+  regionAmount: 20
 --- !u!212 &1534017575
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class VoronoiDiagram : MonoBehaviour
 {
-	public float compare = 0.8f;
 	public Vector2Int imageDim = new Vector2Int(256, 256);
-	public int regionAmount = 30;
+	public int regionAmount = 20;
 	
 	private void Start()
 	{
@@ -28,7 +27,7 @@ public class VoronoiDiagram : MonoBehaviour
 		for(int i = 0; i < regionAmount; i++)
 		{
 			centroids[i] = new Vector2Int(Random.Range(0, imageDim.x), Random.Range(0, imageDim.y));
-			regions[i] = new Color(Random.Range(0f, 0.8f), Random.Range(0f, 0.8f), Random.Range(0f, 0.8f), 1f);
+			regions[i] = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1f);
 		}
 		Color[] pixelColors = new Color[imageDim.x * imageDim.y];
 		for(int x = 0; x < imageDim.x; x++)
@@ -57,7 +56,7 @@ public class VoronoiDiagram : MonoBehaviour
 				index = i;
 			}
 		}
-		return (smallestDst / secondSmallestDst) > compare ? regionAmount : index;
+		return index;
 	}
 
 	Texture2D GetImageFromColorArray(Color[] pixelColors)
