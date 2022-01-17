@@ -47,7 +47,6 @@ public class BlueNoiseSprite : MonoBehaviour
                 }
                 else {
                     GameObject tree = Instantiate(trees[Random.Range(0, trees.Count)], new Vector3(vectors.x, 0f, vectors.y), Quaternion.identity, GameObject.Find("debug").transform);
-                    tree.transform.Rotate(0f, Random.Range(0f, 360f), 0f);
                 }
             }
         }

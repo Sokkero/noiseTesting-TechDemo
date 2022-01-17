@@ -5,20 +5,28 @@ using UnityEngine;
 public class VoronoiTerrainGenerator : MonoBehaviour
 {
     [SerializeField]private GameObject exampleSprite;
+
     [Header("Terrain")]
     [SerializeField]private Texture2D grassTex;
     [SerializeField]private Texture2D pathTex; 
     [SerializeField]private float height = 1;
     [SerializeField]private int terrainDimension = 256;
+
     [Header("Voronoi")]
     [Tooltip("The grayscale threshold for a point to count as a path")]
 	[SerializeField]private float pathThreshold = 0.8f;
 	[SerializeField]private int regionAmount = 30;
+    [SerializeField]private float voronoiScale = 0.2f;
+
+    [Header("Perlin & Blue")]
+    [SerializeField]private bool perlinNoise = false;
+    [SerializeField]private bool blueNoise = false;
+    [SerializeField]private float intensity = 1f;
+    [SerializeField]private float perlinScale = 1f;
     private Terrain myTerrain;
     private int alphamapRes;
     private float[,,] splatMapData;
     [HideInInspector]public List<Vector2Int> pathPositions = new List<Vector2Int>();
-    [SerializeField]private bool blueNoise = false;
     private bool fog = false;
 	
 	private void Start()
@@ -41,6 +49,10 @@ public class VoronoiTerrainGenerator : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.F)){
             fog = !fog;
             RenderSettings.fog = fog;
+        }
+        else if(Input.GetKeyDown(KeyCode.P)){
+            perlinNoise = !perlinNoise;
+            startGenerating();
         }
     }
 
@@ -105,22 +117,26 @@ public class VoronoiTerrainGenerator : MonoBehaviour
 		{
 			for(int y = 0; y < terrainDimension; y++)
 			{
-                float value = getPositionValue(x,y,centroids);
+                float value = getVoronoiValue(x,y,centroids);
 
-                if(value == 1){
+                if(value == voronoiScale){
                     SetSplatValue(x, y, 0);
                 }
                 else {
                     pathPositions.Add(new Vector2Int(y, x));
                     SetSplatValue(x, y, 1);
                 }
+
+                if(perlinNoise)
+                    value += getPerlinValue(x, y);
+
 				posValues[x,y] = value;
 			}
 		}
 		return posValues;
 	}
 
-	float getPositionValue(int x, int y, Vector2Int[] centroids)
+	float getVoronoiValue(int x, int y, Vector2Int[] centroids)
 	{
 		float smallestDst = float.MaxValue;
 		float secondSmallestDst = float.MaxValue;
@@ -135,6 +151,12 @@ public class VoronoiTerrainGenerator : MonoBehaviour
 				index = i;
 			}
 		}
-		return (smallestDst / secondSmallestDst) > pathThreshold ? 0 : 1;
+		return (smallestDst / secondSmallestDst) > pathThreshold ? 0f : voronoiScale;
 	}
+
+    float getPerlinValue(float x, float y){
+        x *= perlinScale;
+        y *= perlinScale;
+        return Mathf.Clamp(Mathf.PerlinNoise(x, y) * intensity, 0f, 0.75f);
+    }
 }
