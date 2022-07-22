@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraController : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [SerializeField]private float cameraSensivity = 200f;
     [SerializeField]private float cameraDistance = 260f;
@@ -11,10 +11,10 @@ public class cameraController : MonoBehaviour
     private float rotationX = -60f;
     private float rotationY = 0f;
     private GameObject lookTarget;
-    private perlinTerrainGenerator myGen;
+    private GradientNoiseTerrainGenerator myGen;
 
     private void Start() {
-        myGen = FindObjectOfType<perlinTerrainGenerator>();
+        myGen = FindObjectOfType<GradientNoiseTerrainGenerator>();
         lookTarget = new GameObject();
         lookTarget.name = "cameraHolder";
         this.transform.parent = lookTarget.transform;
