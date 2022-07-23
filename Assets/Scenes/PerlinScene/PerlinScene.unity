@@ -535,19 +535,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7159195980667990144, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
       propertyPath: m_text
-      value: 'r\tregenerate map
+      value: 'Perlin Gradient Noise Demo
 
-        z\ttoggle random
+        r\tregenerate map
+
+        z\ttoggle
+        random
 
         x\ttoggle scroll
 
-        e\ttoggle
-        second layer
+        e\ttoggle second layer
 
-        m\ttoggle domain rotation
+        m\ttoggle
+        domain rotation
 
-        v\ttoggle 3D noise
-        mode
+        v\ttoggle 3D noise mode
 
         +\t+strength
 

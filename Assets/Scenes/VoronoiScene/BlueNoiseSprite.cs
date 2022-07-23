@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BlueNoiseSprite : MonoBehaviour
 {
-    [SerializeField]private bool showCylinders = false;
     [SerializeField]private List<GameObject> trees = new List<GameObject>();
     [SerializeField]private GameObject debugCylinder;
     [SerializeField]private int pointAmount = 100;
@@ -12,13 +11,7 @@ public class BlueNoiseSprite : MonoBehaviour
     [SerializeField]private float distance = 5;
     [SerializeField]private int dimension = 256;
 
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.C)){
-            showCylinders = !showCylinders;
-        }
-    }
-
-    public void generateBluePoints(){
+    public void generateBluePoints(bool showCylinders){
         clearTerrain();
 
         List<Vector2Int> points = new List<Vector2Int>();

@@ -18,11 +18,15 @@ public class VoronoiTerrainGenerator : MonoBehaviour
 	[SerializeField]private int regionAmount = 30;
     [SerializeField]private float voronoiScale = 0.2f;
 
-    [Header("Perlin & Blue")]
-    [SerializeField]private bool perlinNoise = false;
+    [Header("Gradient Noise")]
+    [SerializeField]private bool gradientNoise = false;
+    [SerializeField]private float intensity = 0.8f;
+    [SerializeField]private float gradientNoiseScale = 0.0225f;
+
+    [Header("Blue Noise")]
     [SerializeField]private bool blueNoise = false;
-    [SerializeField]private float intensity = 1f;
-    [SerializeField]private float perlinScale = 1f;
+    [SerializeField] private bool showBlueNoiseCylinders = true;
+
     private Terrain myTerrain;
     private int alphamapRes;
     private float[,,] splatMapData;
@@ -35,23 +39,32 @@ public class VoronoiTerrainGenerator : MonoBehaviour
 	}
 
     private void Update() {
+        bool shouldRegenerate = false;
         if(Input.GetKeyDown(KeyCode.R)){
-            startGenerating();
+            shouldRegenerate = true;
         }
-        else if(Input.GetKeyDown(KeyCode.H)){
+        if(Input.GetKeyDown(KeyCode.H)){
             exampleSprite.SetActive(!exampleSprite.activeSelf);
         }
-        else if(Input.GetKeyDown(KeyCode.B)){
+        if(Input.GetKeyDown(KeyCode.B)){
             blueNoise = !blueNoise;
             FindObjectOfType<BlueNoiseSprite>().clearTerrain();
-            startGenerating();
+            shouldRegenerate = true;
         }
-        else if(Input.GetKeyDown(KeyCode.F)){
+        if(Input.GetKeyDown(KeyCode.F)){
             fog = !fog;
             RenderSettings.fog = fog;
         }
-        else if(Input.GetKeyDown(KeyCode.P)){
-            perlinNoise = !perlinNoise;
+        if(Input.GetKeyDown(KeyCode.G)){
+            gradientNoise = !gradientNoise;
+            shouldRegenerate = true;
+        }
+        if(Input.GetKeyDown(KeyCode.C)){
+            showBlueNoiseCylinders = !showBlueNoiseCylinders;
+            shouldRegenerate = true;
+        }
+
+        if(shouldRegenerate){
             startGenerating();
         }
     }
@@ -80,7 +93,7 @@ public class VoronoiTerrainGenerator : MonoBehaviour
         myTerrain.terrainData.SetAlphamaps(0, 0, splatMapData);
 
         if(blueNoise) 
-            FindObjectOfType<BlueNoiseSprite>().generateBluePoints();
+            FindObjectOfType<BlueNoiseSprite>().generateBluePoints(showBlueNoiseCylinders);
     }
 
     void SetSplatValue(int x, int y, int splat)
@@ -127,8 +140,8 @@ public class VoronoiTerrainGenerator : MonoBehaviour
                     SetSplatValue(x, y, 1);
                 }
 
-                if(perlinNoise)
-                    value += getPerlinValue(x, y);
+                if(gradientNoise)
+                    value += getGradientNoiseValue(x, y);
 
 				posValues[x,y] = value;
 			}
@@ -154,9 +167,10 @@ public class VoronoiTerrainGenerator : MonoBehaviour
 		return (smallestDst / secondSmallestDst) > pathThreshold ? 0f : voronoiScale;
 	}
 
-    float getPerlinValue(float x, float y){
-        x *= perlinScale;
-        y *= perlinScale;
-        return Mathf.Clamp(Mathf.PerlinNoise(x, y) * intensity, 0f, 0.75f);
+    float getGradientNoiseValue(float x, float y)
+    {
+        x *= gradientNoiseScale;
+        y *= gradientNoiseScale;
+        return Mathf.Clamp((OpenSimplex2.Noise2(0, x, y) * 0.5f + 0.5f) * intensity, 0f, 0.75f);
     }
 }
