@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeScript : MonoBehaviour {
+public class TreePlacement : MonoBehaviour {
     private void Awake() {
         Terrain myTerrrain = FindObjectOfType<Terrain>();
 
