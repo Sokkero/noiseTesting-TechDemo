@@ -7,7 +7,7 @@ public class TreePlacement : MonoBehaviour {
         Terrain myTerrrain = FindObjectOfType<Terrain>();
 
         this.transform.Rotate(0f, Random.Range(0f, 360f), 0f);
-        
+
         Vector3 newPos = this.transform.position;
         newPos.y = myTerrrain.SampleHeight(this.transform.position);
         this.transform.position = newPos;
