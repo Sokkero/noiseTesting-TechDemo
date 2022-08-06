@@ -376,18 +376,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ed5e699dd824e5791c942065079a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomize: 1
+  randomize: 0
   scroll: 0
-  height: 100
-  scrollSpeed: 3
+  noiseBaseScale: 0.01
+  height: 140
+  scrollSpeed: 3.5
   terrainDimension: 256
   voxel: 0
   voxelDecimal: 2
+  is3DNoiseModeEnabled: 0
+  noiseType: 1
+  scrollOffset: 0
+  noise01Seed: 0
   noise01Scale: 4
   hardness: 0.25
   offsetX01: 0
   offsetY01: 0
-  includeThis: 0
+  includeLayer2: 0
+  noise02Seed: 1
   noise02Scale: 0.8
   offsetX02: 0
   offsetY02: 0
@@ -523,26 +529,57 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7159195980137633452, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
+      propertyPath: m_text
+      value: '[fps placeholder]'
+      objectReference: {fileID: 0}
     - target: {fileID: 7159195980667990144, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
       propertyPath: m_text
-      value: 'r -> remap
+      value: 'Perlin Gradient Noise Demo
 
-        z -> toggle random
+        r\tregenerate map
 
-        x -> toggle scroll
+        z\ttoggle
+        random
 
-        e
-        -> toggle perlin02
+        x\ttoggle scroll
 
-        + -> +strenght
+        e\ttoggle second layer
 
-        - -> -strenght
+        m\ttoggle
+        domain rotation
+
+        v\ttoggle 3D noise mode
+
+        +\t+strength
+
+        -\t-strength
 
 '
       objectReference: {fileID: 0}
     - target: {fileID: 7159195980667990144, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
       propertyPath: m_margin.z
       value: -59.582436
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159195980667990147, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.0999756
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159195980667990147, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159195980667990147, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -57
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159195980667990147, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159195980667990147, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7159195981345774059, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
       propertyPath: m_LocalPosition.x

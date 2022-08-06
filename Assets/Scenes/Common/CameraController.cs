@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraController : MonoBehaviour
-{
-    [SerializeField]private float cameraSensivity = 200f;
-    [SerializeField]private float cameraDistance = 260f;
-    [SerializeField]private float cameraMoveSpeed = 50f;
-    [SerializeField]private float zoomFactor = 0.05f;
+public class CameraController : MonoBehaviour {
+
+    [SerializeField] private float cameraSensivity = 200f;
+    [SerializeField] private float cameraDistance = 260f;
+    [SerializeField] private float cameraMoveSpeed = 50f;
+    [SerializeField] private float zoomFactor = 0.05f;
+
     private float rotationX = -60f;
     private float rotationY = 0f;
     private GameObject lookTarget;
-    private perlinTerrainGenerator myGen;
+    private GradientNoiseTerrainGenerator myGen;
 
     private void Start() {
-        myGen = FindObjectOfType<perlinTerrainGenerator>();
+        myGen = FindObjectOfType<GradientNoiseTerrainGenerator>();
         lookTarget = new GameObject();
         lookTarget.name = "cameraHolder";
         this.transform.parent = lookTarget.transform;
@@ -23,12 +24,11 @@ public class cameraController : MonoBehaviour
     }
 
     private void Update() {
-        if(Input.GetKey(KeyCode.LeftShift)){
+        if (Input.GetKey(KeyCode.LeftShift)) {
             float scrollAmount = (Input.GetAxis("Vertical") * zoomFactor) * (cameraDistance * 0.3f);
             cameraDistance += scrollAmount * -1f;
             cameraDistance = Mathf.Clamp(cameraDistance, 10f, 1000f);
-        }
-        else {
+        } else {
             rotationY += (Input.GetAxis("Horizontal") * -1f) * cameraMoveSpeed * Time.deltaTime;
             rotationX += Input.GetAxis("Vertical") * cameraMoveSpeed * Time.deltaTime;
         }

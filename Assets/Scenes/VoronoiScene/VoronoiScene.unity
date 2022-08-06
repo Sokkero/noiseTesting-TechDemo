@@ -324,24 +324,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7159195980137633452, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
+      propertyPath: m_text
+      value: '[fps placeholder]'
+      objectReference: {fileID: 0}
     - target: {fileID: 7159195980137633455, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 7159195980667990144, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
       propertyPath: m_text
-      value: 'r -> remap
+      value: 'Voronoi Generation Demo
 
-        h -> toggle sprite
+        r\tregenerate map
 
-        b-> toggle blue noise
+        h\ttoggle
+        overlay sprite
 
-        c->
-        toggle trees/cylinders
+        b\ttoggle blue noise
 
-        f -> toggle fog
+        c\ttoggle trees/cylinders
 
-        p -> toggle perlin'
+        f\ttoggle
+        fog
+
+        g\ttoggle gradient noise'
       objectReference: {fileID: 0}
     - target: {fileID: 7159195980667990144, guid: ae33982b42a504e37853a3014a26ef56, type: 3}
       propertyPath: m_margin.z
@@ -497,10 +504,11 @@ MonoBehaviour:
   pathThreshold: 0.8
   regionAmount: 30
   voronoiScale: 0.08
-  perlinNoise: 0
+  gradientNoise: 0
+  intensity: 0.8
+  gradientNoiseScale: 0.0225
   blueNoise: 0
-  intensity: 1
-  perlinScale: 0.03
+  showBlueNoiseCylinders: 1
   pathPositions:
   - {x: 7, y: 0}
   - {x: 55, y: 0}
@@ -13360,7 +13368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027ca75cbd3a14fc4b3299fbdf92b023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showCylinders: 1
   trees:
   - {fileID: 8986410079171730362, guid: 709fdf28212ef44afa9eb27fe7567369, type: 3}
   - {fileID: 151704548082302931, guid: 5e21bbbd8fca14e64aa2aba509ab84a6, type: 3}

@@ -8,32 +8,39 @@ The powerpoint presentation that was made for this showcase can be downloaded [h
 
 ## 2) Perlin noise
 
-The main showcase of perlin noise and layering perlin is found in the `PerlinNoise.unity`.<br>
-The Terrain gameobject holds the `perlinTerrainGenerator.cs`.
-- All values used in calculations can be accessed from the inspector
+Perlin noise was the first type of gradient noise introduced to the world, and is what the presentation primarily covered. The main showcase of perlin noise and layering is found in `PerlinScene.unity`.<br>
+The Terrain gameobject holds `GradientNoiseTerrainGenerator.cs`.
+- A domain rotation toggle is included, which mitigates some of the algorithm's inherent square alignment artifacts.
+- All values used in calculations can be accessed from the inspector.
 
+## 2) Simplex(-type) noise
+
+Simplex(-type) noise is a successor to Perlin that improves pattern angle distribution by changing the internal grid structure. A showcase with layering can be found in `SimplexScene.unity`.<br>
+The Terrain gameobject here also holds `GradientNoiseTerrainGenerator.cs`.
+- All values used in calculations can be accessed from the inspector.
 
 ## 3) Voronoi Diagrams/Worley noise
 
 The main showcase of voronoi diagrams is found in the `VoronoiScene.unity`.<br>
-The Terrain gameobject holds the `VoronoiTerrainGenerator.cs` which creates the shown terrain.<br>
-The `exampleSprite` (child object of `Main Camera`) holds the `VoronoiDiagram.cs` which creates the initial voronoi diagram shown.
-- All values used in calculations can be accessed from the inspector
-
+The Terrain gameobject holds `VoronoiTerrainGenerator.cs` which creates the shown terrain.<br>
+The `exampleSprite` (child object of `Main Camera`) holds `VoronoiDiagram.cs` which creates the initial voronoi diagram shown.
+- All values used in calculations can be accessed from the inspector.
 
 ## 4) Blue noise
 
-The main showcase of blue noise and layering it with perlin and voronoi is found in the `VoronoiScene.unity`.<br>
-The Terrain gameobject holds the `BlueNoiseSprite.cs` which creates the assets placed by the noise function.
-- All values used in calculations can be accessed from the inspector
-
+The main showcase of blue noise and layering it with gradient noise and voronoi is also found in `VoronoiScene.unity`.<br>
+The Terrain gameobject holds `BlueNoiseSprite.cs` which creates the assets placed by the noise function.
+- All values used in calculations can be accessed from the inspector.
 
 ## 4) Sources, references and helpful links
 
 General:
 - [https://www.ronja-tutorials.com/](https://www.ronja-tutorials.com/)
 
-Perlin noise:
+Gradient/Simplex/Perlin noise:
+- [https://en.wikipedia.org/wiki/Gradient_noise](https://en.wikipedia.org/wiki/Gradient_noise)
+- [https://en.wikipedia.org/wiki/Simplex_noise](https://en.wikipedia.org/wiki/Simplex_noise)
+- [https://weber.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf](https://weber.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf)
 - [https://de.wikipedia.org/wiki/Perlin-Noise](https://de.wikipedia.org/wiki/Perlin-Noise)
 - [https://adrianb.io/2014/08/09/perlinnoise.html](https://adrianb.io/2014/08/09/perlinnoise.html)
 
